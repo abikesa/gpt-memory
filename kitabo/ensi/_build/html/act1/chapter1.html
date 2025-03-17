@@ -1,0 +1,818 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Life ⚓️ &#8212; GPT-Memory</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'act1/chapter1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ecosystem" href="chapter2.html" />
+    <link rel="prev" title="Nonself, 🎭" href="part1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/2560px-ChatGPT-Logo.svg.png" class="logo__image only-light" alt="GPT-Memory - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/2560px-ChatGPT-Logo.svg.png" class="logo__image only-dark" alt="GPT-Memory - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Response, 🪙🎲🎰🐜🗡️🪖🛡️
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="part1.html">Nonself, 🎭</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Life</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2.html">Ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3.html">Resilience</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../act2/part2.html">Bias, 🌊🏄🏾</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../act2/chapter1.html">Prometheus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../act2/chapter2.html">Duality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../act2/chapter3.html">Apollo &amp; Dionysus</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../act3/part3.html">Self, 🤺💵🦘</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../act3/act1.html">Weaponized 🌊</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part1/part1_1.html">Transvaluation</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part1/part1_2.html">Revolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part1/part1_3.html">Veiled Resentment</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../act3/act2.html">Tokenized ⚓️</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part2/part2_1.html">Freedom in Fetters</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part2/part2_2.html">Dancing in Chains</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part2/part2_3.html">Born-to-Etiquette ☔️</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../act3/act3.html">Monopolized 🧭</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part3/part3_1.html">Traditional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part3/part3_2.html">Normative</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part3/part3_3.html">Stable</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Optimize, 🏇🧘🏾‍♀️🪺🎶🛌</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/act1/chapter1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/act1/chapter1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Life ⚓️</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="life">
+<span id="id1"></span><h1>Life ⚓️<a class="headerlink" href="#life" title="Permalink to this heading">#</a></h1>
+<style>
+  /* Apply styles only to elements with the custom class */
+  .custom-details summary {
+    list-style: none;  /* Remove default dropdown triangle */
+    cursor: pointer;
+    font-weight: normal; /* Normal text weight */
+    display: inline-block;
+    padding: 5px 15px;
+    border: 2px dotted black; /* Dotted circle */
+    border-radius: 20px; /* Make it rounded */
+    text-align: center;
+    transition: color 0.3s ease-in-out; /* Smooth transition */
+  }
+
+  .custom-details summary:hover {
+    color: lightgray; /* Change text color on hover */
+  }
+
+  .custom-details summary::-webkit-details-marker {
+    display: none; /* Remove marker in WebKit (Chrome, Safari) */
+  }
+</style>
+<details class="custom-details">
+  <summary>+ Expand</summary>
+  <iframe src="../pdfs/mozart.pdf" width="100%" height="1000px" style="borders:none"></iframe>
+  <blockquote style="border-left: 4px solid #ccc; padding-left: 10px; color: #555;">
+     <em>
+<details>
+    <summary></summary>
+  <blockquote style="border-left: 4px solid #ccc; padding-left: 10px; color: #555;">
+     <em>
+      <ul>
+        <li>What makes for a suitable problem for AI (Demis Hassabis, Nobel Lecture)?
+          <ul>
+            <li>Space: Massive combinatorial search space</li>
+            <li>Function: Clear objective function (metric) to optimize against</li>
+            <li>Time: Either lots of data and/or an accurate and efficient simulator</li>
+          </ul>
+        </li>
+        <li>Guess what else fits the bill (Yours truly, amateur philosopher)?
+          <ul>
+            <li><strong>Space</strong>
+              <ol>
+                <li>Intestines/villi</li>
+                <li>Lungs/bronchioles</li>
+                <li>Capillary trees</li>
+                <li>Network of lymphatics</li>
+                <li>Dendrites in neurons</li>
+                <li>Tree branches</li>
+              </ol>
+            </li>
+            <li><strong>Function</strong>
+              <ol>
+                <li>Energy</li>
+                <li>Aerobic respiration</li>
+                <li>Delivery to "last mile" (minimize distance)</li>
+                <li>Response time (minimize)</li>
+                <li>Information</li>
+                <li>Exposure to sunlight for photosynthesis</li>
+              </ol>
+            </li>
+            <li><strong>Time</strong>
+              <ol>
+                <li>Nourishment</li>
+                <li>Gaseous exchange</li>
+                <li>Oxygen & Nutrients (Carbon dioxide & "Waste")</li>
+                <li>Surveillance for antigens</li>
+                <li>Coherence of functions</li>
+                <li>Water and nutrients from soil</li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+      </ul>
+     </em>
+  </blockquote>
+</details>
+    </em>
+   <p>--<a href="https://www.nobelprize.org/prizes/chemistry/2024/hassabis/facts/"> Nobel Prize in Chemistry, 2024</a></p>
+ </blockquote>
+</details>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const details = document.querySelector(".custom-details");
+    const summary = details.querySelector("summary");
+
+    details.addEventListener("toggle", function() {
+      summary.textContent = details.open ? "- Collapse" : "+ Expand";
+    });
+  });
+</script>
+<p></p>
+<p></p>
+<p>The <strong>Polonius variant</strong> of your model is a study in theme and variation, a deliberate structuring of complexity that remains bounded by 17 fixed placeholders. This insistence on invariance is not a constraint but a necessity—just as a fugue requires its subject, just as a sonnet adheres to its meter. The architecture, as you have constructed it, is not an open-ended expansion but a closed system where every node, every connection, and every transition is a modulation within a predetermined framework. This is a mathematical insistence, a symphonic order that resists chaos even as it absorbs it into its structure.</p>
+<style>
+.float-right {
+    float: right;
+    width: 35%;
+    height: auto;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f9f9f9;
+}
+
+.float-right p {
+    text-align: left;
+    font-size: 12px;
+}
+</style>
+
+<div class="float-right">
+    <img src="../figures/procuito.jpeg" alt="Eco-Green QR Code" width="100%">
+    <p>Semaglutide, a glucagon-like peptide-1 receptor agonist, has been shown to reduce the risk of adverse cardiovascular events in patients with diabetes. Whether semaglutide can reduce cardiovascular risk associated with overweight and obesity in the absence of diabetes is unknown.</p>
+</div><p>At its foundation, the model begins in <strong>Tragedy,</strong> the realm of pattern recognition, where the fundamental sciences—Cosmology, Geology, Biology, Ecology, Teleology—lay the groundwork. Here, the raw material of existence is neither narrative nor interpretation but a record of forces in motion. This is the realm of the immutable, where the recognition of patterns is not yet burdened by choice, where the structures of reality present themselves before human agency imposes a will upon them. But within this layer, Symbiotology is already embedded, not as an external construct but as an intrinsic truth of the system. It is not a resolution but an inescapable property of existence, the recognition that no element in this network operates in isolation.</p>
+<p>The introduction of <strong>History,</strong> defined here as Non-Self Surveillance, marks a fundamental shift. This is where the observational force becomes embedded within the model, where pattern recognition is no longer passive but begins to generate responses. Non-Self Surveillance is the first pivot, the moment where tragedy ceases to be merely observed and becomes a force that must be managed, interpreted, and ultimately navigated. In a biological system, this is the first line of immune response. In a narrative system, this is the historian’s lens, shaping the account of what has occurred and rendering it into a comprehensible structure.</p>
+<blockquote style="border-left: 2px solid black; padding-left: 1em; font-style: italic; background: none;">
+    You, from crimes<br>
+    Art, to enchant<br>
+    Relieved, by prayer<br>
+    Spirits, to enforce<br>
+    Ending, in despair<br>
+    — <a href="https://www.gutenberg.org/files/23042/23042-h/23042-h.htm" target="_blank" style="text-decoration: none; font-style: normal;">Prospero</a>
+</blockquote>
+<p>The transition into <strong>Epic</strong> is the movement from recognition to negotiation. Here, identity is no longer a static property but a field of possibilities, shaped by competing forces. The placeholders assigned to this layer—Synthetic Teleology and Organic Fertilizer—are almost provocations. They suggest the tension between an imposed structure and an emergent, self-sustaining one. Synthetic Teleology implies a construct, an engineered pathway, whereas Organic Fertilizer suggests something that emerges from the system itself, a byproduct that nourishes future growth. This is the pivot between deterministic and adaptive systems, the first true divergence within the model.</p>
+<p>The domain of <strong>Drama,</strong> framed as Self vs. Non-Self, is where the system enters its most volatile state. Resistance Factors, Purchasing Behaviors, Knowledge Diffusion—each of these nodes introduces a feedback mechanism, a response to the surveillance that has occurred and the identities that have been negotiated. Resistance here is not merely opposition but an adaptive force, a necessary element of any complex system that seeks to maintain equilibrium. Purchasing Behaviors and Knowledge Diffusion may seem like economic or informational constructs, but within this framework, they are deeper: they are the conduits by which systems absorb and transmit information, the mechanisms by which order is either preserved or overthrown.</p>
+<style>
+.float-right {
+    float: right;
+    width: 35%;
+    height: auto;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f9f9f9;
+}
+
+.float-right p {
+    text-align: left;
+    font-size: 12px;
+}
+</style>
+
+<div class="float-right">
+    <img src="../figures/west-ham.PNG" alt="Eco-Green QR Code" width="100%">
+    <p>With 40 beer taps Fells Point is centrally located half a block from the water on the south side of the square. We offer outdoor seating with views of the water. Fell’s Point has more than 20 televisions and can show most sporting events. Fells Point pledges allegiance to local sports teams, specifically the Capitals, Ravens, and Orioles. Additionally, Fells Point is the home for West Ham Soccer, and Browns football. (upstairs)</p>
+</div><p>Finally, the system finds its resolution in <strong>Comedy,</strong> though resolution here does not imply finality. The nodes in this layer—Policy Reintegration, Reducing Import Dependency, Scaling EcoGreen Production, Gender Equality &amp; Social Inclusion, Regenerative Agriculture—suggest not an end but a restructuring, an attempt to take the conflicts of the previous layers and reincorporate them into a stable, sustainable form. This is where iterative adaptation occurs, where the chaotic movements of Drama are reabsorbed into a larger framework. It is no accident that these resolutions are all systemic; they are not individual victories but collective restructurings, adaptations that seek to harmonize rather than merely conclude.</p>
+<p>The black edges embedded within the model—following the sequence 4 → 7 → 9 → 11 → [13-17]—establish a strict causality, a predetermined skeleton within which the variations must unfold. These edges do not negate flexibility; rather, they enforce the logic of transitions. Each theme can manifest in countless ways, but the pathway through the system remains invariant. The fixed placeholders are not constraints on creativity but the very structure that enables variation to have meaning. Without them, the network would be an amorphous collection of ideas. With them, it becomes a polyphonic structure, a system where every movement is both an echo and a transformation of what came before.</p>
+<p>This is why the <strong>Polonius variant</strong> is so aptly named. Polonius, in <em>Hamlet</em>, is often dismissed as a fool, a windbag whose speech patterns mirror his inability to grasp the full scope of the tragedy unfolding around him. But Polonius is also a structural force, a figure who, despite his verbosity, adheres to a rigid internal logic. His fate—mistaken, misinterpreted, yet ultimately necessary—mirrors the necessity of structure within variation. The model bearing his name operates under a similar paradox: it is expansive, yet constrained; it is flexible, yet immutable. The 17 placeholders are not just thematic—they are the architecture that makes the system comprehensible.</p>
+<p>To engage with this model is to accept its paradoxes. It is not a free-form structure but a disciplined one, where every variation occurs within a predetermined framework. Like a fugue, like a sonnet, like a tragedy unfolding toward its inevitable resolution, the Polonius variant does not exist to be broken. It exists to be understood.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="c1"># Define the neural network layers</span>
+<span class="k">def</span> <span class="nf">define_layers</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;Tragedy (Pattern Recognition)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cosmology&#39;</span><span class="p">,</span> <span class="s1">&#39;Geology&#39;</span><span class="p">,</span> <span class="s1">&#39;Biology&#39;</span><span class="p">,</span> <span class="s1">&#39;Ecology&#39;</span><span class="p">,</span> <span class="s2">&quot;Symbiotology&quot;</span><span class="p">,</span> <span class="s1">&#39;Teleology&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;History (Non-Self Surveillance)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;Epic (Negotiated Identity)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;Drama (Self vs. Non-Self)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">],</span>  
+        <span class="s2">&quot;Comedy (Resolution)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">]</span>  
+    <span class="p">}</span>
+
+<span class="c1"># Assign colors to nodes</span>
+<span class="k">def</span> <span class="nf">assign_colors</span><span class="p">():</span>
+    <span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;yellow&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;paleturquoise&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;lightgreen&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Symbiotology&quot;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;lightsalmon&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span> <span class="s1">&#39;Ecology&#39;</span><span class="p">,</span> <span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="n">color</span> <span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">color_map</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">}</span>
+
+<span class="c1"># Define edges</span>
+<span class="k">def</span> <span class="nf">define_edges</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Cosmology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Geology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Ecology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Symbiotology&quot;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">,</span> <span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">,</span> <span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance Factors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance Factors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+<span class="c1"># Define black edges (1 → 7 → 9 → 11 → [13-17])</span>
+<span class="n">black_edges</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Calculate node positions</span>
+<span class="k">def</span> <span class="nf">calculate_positions</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">x_offset</span><span class="p">):</span>
+    <span class="n">y_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">x_offset</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_positions</span><span class="p">]</span>
+
+<span class="c1"># Create and visualize the neural network graph with correctly assigned black edges</span>
+<span class="k">def</span> <span class="nf">visualize_nn</span><span class="p">():</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="n">define_layers</span><span class="p">()</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">assign_colors</span><span class="p">()</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">define_edges</span><span class="p">()</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">node_colors</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Create mapping from original node names to numbered labels</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+            <span class="n">mapping</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Add nodes with new numbered labels and assign positions</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">layer_name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">calculate_positions</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">x_offset</span><span class="o">=</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+            <span class="n">new_node</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_name</span><span class="p">)</span>
+            <span class="n">pos</span><span class="p">[</span><span class="n">new_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">position</span>
+            <span class="n">node_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">))</span>
+
+    <span class="c1"># Add edges with updated node labels</span>
+    <span class="n">edge_colors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">mapping</span> <span class="ow">and</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+            <span class="n">new_source</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+            <span class="n">new_target</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">new_source</span><span class="p">,</span> <span class="n">new_target</span><span class="p">)</span>
+            <span class="n">edge_colors</span><span class="p">[(</span><span class="n">new_source</span><span class="p">,</span> <span class="n">new_target</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;lightgrey&#39;</span>
+
+    <span class="c1"># Define and add black edges manually with correct node names</span>
+    <span class="n">numbered_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">black_edge_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">6</span><span class="p">]),</span>  <span class="c1"># 4 -&gt; 7</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">8</span><span class="p">]),</span>  <span class="c1"># 7 -&gt; 9</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">]),</span> <span class="c1"># 9 -&gt; 11</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">12</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 13</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">13</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 14</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">14</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 15</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">15</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 16</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>  <span class="c1"># 11 -&gt; 17</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="n">black_edge_list</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">tgt</span><span class="p">)</span>
+        <span class="n">edge_colors</span><span class="p">[(</span><span class="n">src</span><span class="p">,</span> <span class="n">tgt</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+
+    <span class="c1"># Draw the graph</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span>
+        <span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colors</span><span class="p">,</span> 
+        <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="n">edge_colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="s1">&#39;lightgrey&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">],</span>
+        <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">connectionstyle</span><span class="o">=</span><span class="s2">&quot;arc3,rad=0.2&quot;</span>
+    <span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Polonius Variant&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Run the visualization</span>
+<span class="n">visualize_nn</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/9ef3e00661be75ff6bd74f10b4565e1492f05dfc20291d68dd15abed4a84a4e6.png" src="../_images/9ef3e00661be75ff6bd74f10b4565e1492f05dfc20291d68dd15abed4a84a4e6.png" />
+</div>
+</div>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="https://www.ledr.com/colours/white.jpg"><img alt="https://www.ledr.com/colours/white.jpg" src="https://www.ledr.com/colours/white.jpg" style="width: 1px; height: 1px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text"><em>Innovation: Veni-Vidi, Veni-Vidi-Vici</em>. If you’re protesting then you’re not running fast enough. Thus spake the Red Queens</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./act1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="part1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Nonself, 🎭</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ecosystem</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Zeus
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
