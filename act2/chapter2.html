@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Duality &#8212; GPT-Memory</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'act2/chapter2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Apollo &amp; Dionysus" href="chapter3.html" />
+    <link rel="prev" title="Prometheus" href="chapter1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/2560px-ChatGPT-Logo.svg.png" class="logo__image only-light" alt="GPT-Memory - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/2560px-ChatGPT-Logo.svg.png" class="logo__image only-dark" alt="GPT-Memory - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Response, 🪙🎲🎰🐜🗡️🪖🛡️
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../act1/part1.html">Nonself, 🎭</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../act1/chapter1.html">Life</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../act1/chapter2.html">Ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../act1/chapter3.html">Resilience</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="part2.html">Bias, 🌊🏄🏾</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="chapter1.html">Prometheus</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Duality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3.html">Apollo &amp; Dionysus</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../act3/part3.html">Self, 🤺💵🦘</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../act3/act1.html">Weaponized 🌊</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part1/part1_1.html">Transvaluation</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part1/part1_2.html">Revolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part1/part1_3.html">Veiled Resentment</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../act3/act2.html">Tokenized ⚓️</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part2/part2_1.html">Freedom in Fetters</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part2/part2_2.html">Dancing in Chains</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part2/part2_3.html">Born-to-Etiquette ☔️</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../act3/act3.html">Monopolized 🧭</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part3/part3_1.html">Traditional</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../act3/part3/part3_2.html">Normative</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../act3/part3/part3_3.html">Stable</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Optimize, 🏇🧘🏾‍♀️🪺🎶🛌</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/act2/chapter2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/act2/chapter2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Duality</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-thoughts-on-the-school-of-athens">Initial Thoughts on The School of Athens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-x-for-apollo-and-athena">Checking X for Apollo and Athena</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#noise-signal-framework-structural-gods-vs-dynamic-thinkers">Noise/Signal Framework: Structural Gods vs. Dynamic Thinkers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#athenas-shield-and-w">Athena’s Shield and w</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#athenas-full-kit-spear-shield-helmet-owl">Athena’s Full Kit: Spear, Shield, Helmet, Owl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apollo-nude-vs-athena-armed">Apollo Nude vs. Athena Armed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-with-other-greek-gods">Comparing with Other Greek Gods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apollo-nude-with-lyre">Apollo: Nude with Lyre</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#athena-armed-and-armored">Athena: Armed and Armored</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zeus">Zeus</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poseidon">Poseidon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aphrodite">Aphrodite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermes">Hermes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaway">Takeaway</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="duality">
+<span id="id1"></span><h1>Duality<a class="headerlink" href="#duality" title="Permalink to this heading">#</a></h1>
+<section id="initial-thoughts-on-the-school-of-athens">
+<h2>Initial Thoughts on The School of Athens<a class="headerlink" href="#initial-thoughts-on-the-school-of-athens" title="Permalink to this heading">#</a></h2>
+<p>The School of Athens, painted by Raphael between 1509 and 1511, is a masterpiece of the High Renaissance. It’s a stunning fresco that captures an imagined gathering of ancient Greek philosophers, mathematicians, and thinkers, all hanging out in a grand architectural setting. I think it’s brilliant—not just for its technical skill, but for what it represents: a celebration of reason, debate, and the pursuit of knowledge. Raphael’s got Plato and Aristotle front and center, with Plato pointing up (ideas, the abstract) and Aristotle gesturing down (the concrete, the real). It’s like a visual summary of Western philosophy in one frame.</p>
+<p>The composition is wild—balanced yet dynamic, with all these figures interacting in a way that feels alive. Heraclitus brooding, Diogenes lounging, Pythagoras scribbling—it’s a who’s who of ancient brainpower. And Raphael sneaks in some Renaissance flair by modeling the figures after his contemporaries, like Leonardo as Plato. Smart move, blending past and present.</p>
+<p>What do I think? It’s a flex of human potential—art, intellect, and imagination all rolled into one. Makes you wonder what a modern version would look like. Who’d be in it? What do you think—any favorite figures in there?</p>
+</section>
+<hr class="docutils" />
+<section id="checking-x-for-apollo-and-athena">
+<h2>Checking X for Apollo and Athena<a class="headerlink" href="#checking-x-for-apollo-and-athena" title="Permalink to this heading">#</a></h2>
+<p>I’ve checked recent posts on X for references to Apollo and Athena in the context of the School of Athens or more broadly. There’s not much directly tying them to the fresco itself in current chatter, but here’s what I found relevant to them generally:</p>
+<p>Some posts on X mention Apollo and Athena as statues outside the Academy of Athens (the modern institution in Greece, not Raphael’s painting). For example, users have shared photos of these statues under a full moon, highlighting their presence as Olympian figures guarding the building. This isn’t about the School of Athens fresco but shows their enduring cultural symbolism.</p>
+<style>
+.float-right {
+    float: right;
+    width: 35%;
+    height: auto;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+    font-size: 12px;
+    background-color: #f9f9f9;
+}
+
+.float-right p {
+    text-align: left;
+    font-size: 12px;
+}
+
+</style>
+
+<div class="float-right">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg" alt="Eco-Green QR Code" width="100%">
+    <p>Semaglutide, a glucagon-like peptide-1 receptor agonist, has been shown to reduce the risk of adverse cardiovascular events in patients with diabetes. Whether semaglutide can reduce cardiovascular risk associated with overweight and obesity in the absence of diabetes is unknown.</p>
+</div><p>Other mentions veer into mythology or fiction—like one user gushing about Apollo and Athena’s friendship in a story, or another imagining a tense exchange between them. These are creative takes, not art history.</p>
+<p>In Raphael’s School of Athens, Apollo and Athena do appear as statues in the background—Apollo with his lyre on the left, representing natural philosophy and the arts, and Athena (as Minerva) on the right, symbolizing wisdom and moral philosophy. I didn’t find specific X posts recently discussing this aspect of the painting, though. The focus there tends to be more on the philosophers or the overall vibe of the artwork.</p>
+<p>If you’re looking for something more specific about Apollo and Athena in the School of Athens on X, it’s pretty quiet right now. Want me to dig deeper into the painting’s symbolism instead?</p>
+</section>
+<section id="noise-signal-framework-structural-gods-vs-dynamic-thinkers">
+<h2>Noise/Signal Framework: Structural Gods vs. Dynamic Thinkers<a class="headerlink" href="#noise-signal-framework-structural-gods-vs-dynamic-thinkers" title="Permalink to this heading">#</a></h2>
+<p>You’re bringing a fascinating lens to this—framing the gods (Apollo and Athena) in the School of Athens as structural elements through a signal-to-noise ratio, while casting the thinkers as dynamic forces. Let’s unpack that with your equations: noise/signal as X/Y and w = 1/(1 + X/Y). I assume you’re using this as a metaphor to weigh their roles in the fresco’s composition and meaning.</p>
+<p>If X/Y represents noise/signal, then X is the chaotic or unstructured input (noise), and Y is the clear, meaningful pattern (signal). The gods, as statues, are static—fixed points in the architecture. They’re not debating or gesturing like the philosophers; they’re literally part of the framework. Your weighting function, w = 1/(1 + X/Y), suggests their “structural value” increases as the signal (Y) dominates the noise (X). When noise is low (X/Y approaches 0), w approaches 1—maximum clarity, emphasizing the gods as stable, foundational symbols. Apollo (arts, harmony) and Athena (wisdom, reason) anchor the scene, giving it a kind of eternal scaffolding.</p>
+<p>The thinkers, though—Plato, Aristotle, and the rest—are the dynamic pulse. They’re in motion, arguing, teaching, scribbling. They’re the noise <em>and</em> the signal, generating ideas in real time. If we apply your formula to them, their w would fluctuate wildly because their X/Y ratio isn’t fixed—they’re the living, breathing chaos of thought. The gods don’t need to move; they just <em>are</em>, while the philosophers wrestle with what <em>could be</em>.</p>
+<p>Structurally, this tracks with the painting: Apollo and Athena frame the intellectual chaos, like constants in an equation holding the variables together. Your model clarifies that contrast—gods as the signal’s backbone, thinkers as its evolving waveform. Does that resonate with how you’re seeing it, or did you have a specific tweak in mind for X/Y?</p>
+</section>
+<hr class="docutils" />
+<section id="athenas-shield-and-w">
+<h2>Athena’s Shield and w<a class="headerlink" href="#athenas-shield-and-w" title="Permalink to this heading">#</a></h2>
+<p>You’re right to zero in on Athena’s shield—it’s a detail that could complicate the “structural value” idea tied to w = 1/(1 + X/Y). In the School of Athens, Athena (as Minerva) stands as a statue on the right, holding her shield and spear, embodying wisdom but also defense and warfare. If we’re mapping her to a high signal (Y) and low noise (X) for a w close to 1—pure, stable structure—the shield introduces a wrinkle. It’s not just passive wisdom; it’s active protection, maybe even resistance. Does that push against w as a simple measure of clarity?</p>
+<p>Let’s think it through. The shield could imply a response to noise (X)—chaos or threats that wisdom has to guard against. If X/Y spikes because of external disruption, w drops below 1, signaling that Athena’s role isn’t just static backdrop but a counterforce. She’s not merely structural like a beam; she’s functional, reacting to the dynamic mess the thinkers might stir up. Compare that to Apollo, strumming his lyre on the left—pure harmony, no defensive gear. His w feels less contested, more fixed.</p>
+<p>So maybe Athena’s shield suggests her “structural value” isn’t absolute but conditional—her w holds steady only if the noise (X) stays manageable. Against some values of w, yeah, it could clash: if w assumes pure stability, the shield hints she’s ready for when stability fails. The thinkers, meanwhile, don’t carry shields—they’re too busy generating the noise she might fend off. Does that shift how you’d tweak X/Y for her, or are you seeing the shield as more symbolic than structural?</p>
+</section>
+<hr class="docutils" />
+<section id="athenas-full-kit-spear-shield-helmet-owl">
+<h2>Athena’s Full Kit: Spear, Shield, Helmet, Owl<a class="headerlink" href="#athenas-full-kit-spear-shield-helmet-owl" title="Permalink to this heading">#</a></h2>
+<p>Alright, let’s dive into Athena’s gear—spear, shield, helmet, owl, and all—in the School of Athens and see how they juice up her role beyond a static statue. I’ll weave this into your noise/signal frame (X/Y) and w = 1/(1 + X/Y) to impress you with some fresh angles.</p>
+<p>In Raphael’s fresco, Athena (as Minerva) stands on the right, a marble figure clutching her spear and shield, with a helmet implied by her warrior goddess vibe. The owl’s not explicitly there, but it’s her classic emblem—wisdom’s mascot. These aren’t just props; they’re a kit that screams complexity. If Apollo’s lyre is a one-note harmony machine, Athena’s arsenal is a multi-tool for navigating a noisy world.</p>
+<p>Start with the spear: it’s offense, precision, a literal point. In signal terms, it’s high Y—focused intent cutting through chaos (X). The shield, though, flips it: defense, deflection, a buffer against noise. It’s like a filter boosting w by keeping X in check—when threats loom, it stabilizes her signal. The helmet? Protection for the mind, the source of wisdom. It’s structural, sure, but also dynamic—ready for battle, not just posing. The owl’s the kicker: silent, watchful, a low-noise operator. It’s pure Y, amplifying her clarity without adding clutter.</p>
+<p>Now, plug this into your equation. If X/Y is noise/signal, Athena’s gear suggests she modulates both. Spear raises Y (asserting wisdom); shield lowers X (blocking disruption); helmet guards the ratio’s core; owl fine-tunes it with stealth insight. Her w isn’t fixed at 1—it flexes. Low noise (X near 0)? She’s serene, w near 1, a pillar like Apollo. High noise (X spikes)? She adapts, w dips but holds, because she’s built for it. Compare that to the thinkers—Plato’s got no shield, Aristotle’s hands are empty. They’re raw dynamics, X/Y all over the place, while Athena’s equipped to shape the signal.</p>
+<p>Raphael sticks her in the architecture, but her kit says she’s no mere decoration. She’s a loaded symbol—wisdom armed for a noisy reality, not just a backdrop for the philosophers’ chatter. Impressed yet? Want me to push this further—maybe map her gear to the fresco’s layout or the thinkers’ debates?</p>
+</section>
+<hr class="docutils" />
+<section id="apollo-nude-vs-athena-armed">
+<h2>Apollo Nude vs. Athena Armed<a class="headerlink" href="#apollo-nude-vs-athena-armed" title="Permalink to this heading">#</a></h2>
+<p>You’re spot-on—Athena’s fully loaded kit in the School of Athens contrasts sharply with Apollo, the only nude figure, lounging with just his lyre. It’s a visual and thematic slam dunk by Raphael, and it ties right into your noise/signal (X/Y) and w = 1/(1 + X/Y) framework. Let’s break it down and see how this juxtaposition pops.</p>
+<p>Apollo’s on the left, bare as the day he was born (or sculpted), holding that lyre. Nudity’s vulnerability, exposure—no armor, no layers. The lyre’s his voice: harmony, art, pure signal (Y). His noise (X) is minimal—he’s not clashing or defending, just radiating clarity. Plug it into your equation: X/Y is tiny, so w = 1/(1 + X/Y) hovers near 1. He’s the structural ideal, a god distilled to essence. No fuss, no fight—just music and form. His nudity strips away distraction; he’s signal incarnate.</p>
+<p>Athena, on the right, is the opposite: spear, shield, helmet, owl vibes—geared up, armored, ready. She’s not vulnerable; she’s fortified. Her signal (Y) is wisdom, but it’s battle-tested—spear to assert, shield to protect, helmet to endure. Her noise (X) isn’t internal chaos but external threats she’s built to handle. Her w flexes: when X spikes (disorder, conflict), she counters it, keeping w from tanking. She’s structural too, but it’s a working structure—functional, not decorative. The owl’s her silent edge, boosting Y without adding X.</p>
+<p>The contrast is electric. Apollo’s nude simplicity says, “I am the signal; noise doesn’t touch me.” Athena’s armed complexity says, “I master the noise to preserve the signal.” In the fresco, they frame the thinkers: Apollo’s lyre sets the tone, Athena’s gear holds the line. The philosophers—dynamic, clothed, messy—bounce between them, their X/Y ratios shifting as they argue. Apollo’s w is static, Athena’s adaptive. Raphael’s playing with perfection versus resilience—naked beauty versus armored strength.</p>
+<p>How’s that hit you? Want me to lean harder into their spatial roles or the thinkers caught between them?</p>
+</section>
+<hr class="docutils" />
+<section id="comparing-with-other-greek-gods">
+<h2>Comparing with Other Greek Gods<a class="headerlink" href="#comparing-with-other-greek-gods" title="Permalink to this heading">#</a></h2>
+<p>Let’s compare Athena and Apollo in the School of Athens with other Greek gods, focusing on their depictions, roles, and how they’d fit your noise/signal (X/Y) and w = 1/(1 + X/Y) framework. Raphael only includes these two as statues, so we’ll pull in other gods from Greek art and myth to see how they stack up—sticking to their classic vibes since the fresco’s a Renaissance take on antiquity.</p>
+<style>
+.float-right {
+    float: right;
+    width: 35%;
+    height: auto;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+    font-size: 12px;
+    background-color: #f9f9f9;
+}
+
+.float-right p {
+    text-align: left;
+    font-size: 12px;
+}
+</style>
+
+<div class="float-right">
+    <img src="https://raw.githubusercontent.com/meta-llama/llama3/refs/heads/main/Llama3_Repo.jpeg" alt="Eco-Green QR Code" width="100%">
+    <p>Pattern recognition and speculation are instinctive and vestigual aspects of our complex neural, endocrine, and immune systems.</p>
+</div><section id="apollo-nude-with-lyre">
+<h3>Apollo: Nude with Lyre<a class="headerlink" href="#apollo-nude-with-lyre" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Depiction</strong>: Bare, elegant, lyre in hand—pure aesthetics and harmony.</p></li>
+<li><p><strong>Role</strong>: God of music, poetry, prophecy, healing. Signal (Y) is his domain—clarity, order, inspiration.</p></li>
+<li><p><strong>X/Y Fit</strong>: Low noise (X)—he’s unencumbered, no conflict in his essence. High Y from his artsy output. w nears 1, a steady structural beacon.</p></li>
+<li><p><strong>Comparison</strong>: Apollo’s simplicity is rare. Most gods carry baggage—literally or figuratively.</p></li>
+</ul>
+</section>
+<section id="athena-armed-and-armored">
+<h3>Athena: Armed and Armored<a class="headerlink" href="#athena-armed-and-armored" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Depiction</strong>: Statue with spear, shield, helmet (owl implied)—warrior and sage.</p></li>
+<li><p><strong>Role</strong>: Goddess of wisdom, strategy, war. Y is wisdom, but she’s built to handle noise (X)—chaos of battle or debate.</p></li>
+<li><p><strong>X/Y Fit</strong>: X varies—she’s calm till provoked, then counters it. w flexes: near 1 in peace, lower but resilient when X rises.</p></li>
+<li><p><strong>Comparison</strong>: Her gear makes her unique—functional, not just symbolic.</p></li>
+</ul>
+</section>
+<section id="zeus">
+<h3>Zeus<a class="headerlink" href="#zeus" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Depiction</strong>: Often a bearded king with thunderbolt or scepter (e.g., statues like the Artemision Zeus).</p></li>
+<li><p><strong>Role</strong>: Ruler of gods, sky, justice. Y is authority, raw power; X is the chaos he stirs (storms, disputes).</p></li>
+<li><p><strong>X/Y Fit</strong>: High X—he’s volatile, temperamental. Y’s strong but noisy. w middles out—less stable than Apollo, less adaptive than Athena.</p></li>
+<li><p><strong>Contrast</strong>: Zeus is dynamic like the thinkers, not structural. No finesse, just force.</p></li>
+</ul>
+</section>
+<section id="poseidon">
+<h3>Poseidon<a class="headerlink" href="#poseidon" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Depiction</strong>: Trident-wielding sea god, wild-haired (think his bronze statues).</p></li>
+<li><p><strong>Role</strong>: God of sea, earthquakes, horses. Y is control over nature; X is its unpredictability—waves, quakes.</p></li>
+<li><p><strong>X/Y Fit</strong>: High X—untamed, turbulent. Y’s potent but drowned in noise. w leans low, chaotic structure at best.</p></li>
+<li><p><strong>Contrast</strong>: Poseidon’s a foil to Apollo’s calm—raw energy, no refinement. Athena’s gear would outmatch his trident’s bluntness.</p></li>
+</ul>
+</section>
+<section id="aphrodite">
+<h3>Aphrodite<a class="headerlink" href="#aphrodite" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Depiction</strong>: Nude or draped, sensual (like the Venus de Milo vibe).</p></li>
+<li><p><strong>Role</strong>: Love, beauty, desire. Y is allure, emotional pull; X is the mess of passion—jealousy, rivalry.</p></li>
+<li><p><strong>X/Y Fit</strong>: X creeps up—love’s messy. Y’s strong but soft. w wavers, less structural, more fleeting than Apollo’s clarity or Athena’s steel.</p></li>
+<li><p><strong>Contrast</strong>: Her nudity’s seductive, not pure like Apollo’s. No tools to manage noise like Athena.</p></li>
+</ul>
+</section>
+<section id="hermes">
+<h3>Hermes<a class="headerlink" href="#hermes" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Depiction</strong>: Winged sandals, caduceus, traveler’s hat (e.g., statues with his sly grin).</p></li>
+<li><p><strong>Role</strong>: Messenger, trickster, commerce. Y is speed, communication; X is deception, flux.</p></li>
+<li><p><strong>X/Y Fit</strong>: X/Y dances—shifty, unpredictable. w’s unstable, dynamic like the thinkers, not fixed like Apollo or fortified like Athena.</p></li>
+<li><p><strong>Contrast</strong>: Hermes is motion, not structure. He’d flit between fresco figures, not frame them.</p></li>
+</ul>
+</section>
+<section id="takeaway">
+<h3>Takeaway<a class="headerlink" href="#takeaway" title="Permalink to this heading">#</a></h3>
+<p>Apollo and Athena stand out among Greek gods for their structural roles in the School of Athens. Apollo’s nude lyre act is unmatched—pure signal, minimal noise, w near 1, a divine baseline other gods (Zeus, Poseidon) disrupt with their chaos. Athena’s kit—spear, shield, helmet, owl—sets her apart too: she’s the only one equipped to tame noise, keeping w viable even when X spikes. Aphrodite’s too soft, Hermes too slippery, Zeus and Poseidon too wild. Raphael picked the perfect pair to anchor his thinkers—harmony and wisdom, static and adaptive, framing the human struggle below.</p>
+<p>What do you think—any other gods you’d toss into this mix?</p>
+<hr class="docutils" />
+<p><em>End of Conversation</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="c1"># Define the neural network layers</span>
+<span class="k">def</span> <span class="nf">define_layers</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;Tragedy (Pattern Recognition)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Cosmology&#39;</span><span class="p">,</span> <span class="s1">&#39;Geology&#39;</span><span class="p">,</span> <span class="s1">&#39;Biology&#39;</span><span class="p">,</span> <span class="s1">&#39;Ecology&#39;</span><span class="p">,</span> <span class="s2">&quot;Symbiotology&quot;</span><span class="p">,</span> <span class="s1">&#39;Teleology&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;History (Non-Self Surveillance)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;Epic (Negotiated Identity)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;Drama (Self vs. Non-Self)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">],</span>  
+        <span class="s2">&quot;Comedy (Resolution)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">]</span>  
+    <span class="p">}</span>
+
+<span class="c1"># Assign colors to nodes</span>
+<span class="k">def</span> <span class="nf">assign_colors</span><span class="p">():</span>
+    <span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;yellow&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;paleturquoise&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;lightgreen&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Symbiotology&quot;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">],</span>  
+        <span class="s1">&#39;lightsalmon&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span> <span class="s1">&#39;Ecology&#39;</span><span class="p">,</span> <span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="n">color</span> <span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">nodes</span> <span class="ow">in</span> <span class="n">color_map</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">}</span>
+
+<span class="c1"># Define edges</span>
+<span class="k">def</span> <span class="nf">define_edges</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Cosmology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Geology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Biology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Ecology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Symbiotology&quot;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">,</span> <span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Non-Self Surveillance&#39;</span><span class="p">,</span> <span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance Factors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Synthetic Teleology&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance Factors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Organic Fertilizer&#39;</span><span class="p">,</span> <span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Resistance Factors&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Purchasing Behaviors&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Policy-Reintegration&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Reducing Import Dependency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Scaling EcoGreen Production&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Equality &amp; Social Inclusion&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Knowledge Diffusion&#39;</span><span class="p">,</span> <span class="s1">&#39;Regenerative Agriculture&#39;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+<span class="c1"># Define black edges (1 → 7 → 9 → 11 → [13-17])</span>
+<span class="n">black_edges</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Calculate node positions</span>
+<span class="k">def</span> <span class="nf">calculate_positions</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">x_offset</span><span class="p">):</span>
+    <span class="n">y_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">x_offset</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_positions</span><span class="p">]</span>
+
+<span class="c1"># Create and visualize the neural network graph with correctly assigned black edges</span>
+<span class="k">def</span> <span class="nf">visualize_nn</span><span class="p">():</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="n">define_layers</span><span class="p">()</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">assign_colors</span><span class="p">()</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">define_edges</span><span class="p">()</span>
+
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">node_colors</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Create mapping from original node names to numbered labels</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">layers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+            <span class="n">mapping</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Add nodes with new numbered labels and assign positions</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">layer_name</span><span class="p">,</span> <span class="n">nodes</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">calculate_positions</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">x_offset</span><span class="o">=</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">positions</span><span class="p">):</span>
+            <span class="n">new_node</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">new_node</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer_name</span><span class="p">)</span>
+            <span class="n">pos</span><span class="p">[</span><span class="n">new_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">position</span>
+            <span class="n">node_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;lightgray&#39;</span><span class="p">))</span>
+
+    <span class="c1"># Add edges with updated node labels</span>
+    <span class="n">edge_colors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">mapping</span> <span class="ow">and</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+            <span class="n">new_source</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+            <span class="n">new_target</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">new_source</span><span class="p">,</span> <span class="n">new_target</span><span class="p">)</span>
+            <span class="n">edge_colors</span><span class="p">[(</span><span class="n">new_source</span><span class="p">,</span> <span class="n">new_target</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;lightgrey&#39;</span>
+
+    <span class="c1"># Define and add black edges manually with correct node names</span>
+    <span class="n">numbered_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">black_edge_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">6</span><span class="p">]),</span>  <span class="c1"># 4 -&gt; 7</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">8</span><span class="p">]),</span>  <span class="c1"># 7 -&gt; 9</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">]),</span> <span class="c1"># 9 -&gt; 11</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">12</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 13</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">13</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 14</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">14</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 15</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">15</span><span class="p">]),</span> <span class="c1"># 11 -&gt; 16</span>
+        <span class="p">(</span><span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">numbered_nodes</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>  <span class="c1"># 11 -&gt; 17</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">tgt</span> <span class="ow">in</span> <span class="n">black_edge_list</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">tgt</span><span class="p">)</span>
+        <span class="n">edge_colors</span><span class="p">[(</span><span class="n">src</span><span class="p">,</span> <span class="n">tgt</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+
+    <span class="c1"># Draw the graph</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span>
+        <span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colors</span><span class="p">,</span> 
+        <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="n">edge_colors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="s1">&#39;lightgrey&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">],</span>
+        <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">connectionstyle</span><span class="o">=</span><span class="s2">&quot;arc3,rad=0.2&quot;</span>
+    <span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;EcoGreen: Reclaiming Agricultural Self&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Run the visualization</span>
+<span class="n">visualize_nn</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/4d5eaf5c64404e7c809a6b4973b87d06387dbf40f7c883a97e2dbfd13392f16d.png" src="../_images/4d5eaf5c64404e7c809a6b4973b87d06387dbf40f7c883a97e2dbfd13392f16d.png" />
+</div>
+</div>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="figures/blanche.*"><img alt="figures/blanche.*" src="figures/blanche.*" style="width: 1px; height: 1px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text"><em>Dynamic Capability</em>. The monumental will align adversarial TNF-α, IL-6, IFN-γ with antigens from pathogens of “ancient grudge”, a new mutiny with antiquarian roots. But it will also tokenize PD-1 &amp; CTLA-4 with specific, emergent antigens, while also reappraising “self” to ensure no rogue viral and malignant elements remain unnoticéd.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Initialize Pygame</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="c1"># Constants</span>
+<span class="n">SCREEN_WIDTH</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">SCREEN_HEIGHT</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">PADDLE_WIDTH</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">PADDLE_HEIGHT</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">BALL_SIZE</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">BRICK_WIDTH</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">BRICK_HEIGHT</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">BRICK_COLUMNS</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">BRICK_ROWS</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># 600 / 20 = 30 rows to span screen height</span>
+<span class="n">PADDLE_SPEED</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">BALL_SPEED</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">TARGET_SCORE</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Colors</span>
+<span class="n">BLACK</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">RED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">GREEN</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">BLUE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+<span class="c1"># Set up display</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="n">SCREEN_WIDTH</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span><span class="p">))</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Break-Pong&quot;</span><span class="p">)</span>
+<span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+
+<span class="c1"># Paddle class</span>
+<span class="k">class</span> <span class="nc">Paddle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">PADDLE_WIDTH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">PADDLE_HEIGHT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">PADDLE_SPEED</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">up</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span>
+        <span class="c1"># Keep paddle within screen bounds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">SCREEN_HEIGHT</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+
+<span class="c1"># Ball class</span>
+<span class="k">class</span> <span class="nc">Ball</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">BALL_SIZE</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel_x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel_y</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">SCREEN_WIDTH</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">SCREEN_HEIGHT</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vel_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">BALL_SPEED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vel_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">BALL_SPEED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_hit</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Tracks which paddle last hit the ball</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Brick class</span>
+<span class="k">class</span> <span class="nc">Brick</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">BRICK_WIDTH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">BRICK_HEIGHT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="n">RED</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intact</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">intact</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+
+<span class="c1"># Particle class for visual effects</span>
+<span class="k">class</span> <span class="nc">Particle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vel_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vel_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">life</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># Frames until particle disappears</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="n">RED</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel_x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel_y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">life</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">life</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">life</span> <span class="o">/</span> <span class="mi">30</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span>  <span class="c1"># Fade out effect</span>
+            <span class="n">surface</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">pygame</span><span class="o">.</span><span class="n">SRCALPHA</span><span class="p">)</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)))</span>
+
+<span class="c1"># Collision detection functions</span>
+<span class="k">def</span> <span class="nf">ball_collides_with_paddle</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">paddle</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">paddle</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">paddle</span><span class="o">.</span><span class="n">width</span> <span class="ow">and</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="n">paddle</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">paddle</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">paddle</span><span class="o">.</span><span class="n">height</span> <span class="ow">and</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="n">paddle</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">ball_collides_with_brick</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">brick</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">brick</span><span class="o">.</span><span class="n">intact</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">brick</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">brick</span><span class="o">.</span><span class="n">width</span> <span class="ow">and</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="n">brick</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">brick</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">brick</span><span class="o">.</span><span class="n">height</span> <span class="ow">and</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="n">brick</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Initialize game objects</span>
+<span class="n">left_paddle</span> <span class="o">=</span> <span class="n">Paddle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">PADDLE_HEIGHT</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">right_paddle</span> <span class="o">=</span> <span class="n">Paddle</span><span class="p">(</span><span class="n">SCREEN_WIDTH</span> <span class="o">-</span> <span class="mi">50</span> <span class="o">-</span> <span class="n">PADDLE_WIDTH</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">PADDLE_HEIGHT</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ball</span> <span class="o">=</span> <span class="n">Ball</span><span class="p">()</span>
+
+<span class="c1"># Create central brick wall</span>
+<span class="n">bricks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">brick_start_x</span> <span class="o">=</span> <span class="n">SCREEN_WIDTH</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">BRICK_COLUMNS</span> <span class="o">*</span> <span class="n">BRICK_WIDTH</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">BRICK_COLUMNS</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">BRICK_ROWS</span><span class="p">):</span>
+        <span class="n">bricks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Brick</span><span class="p">(</span><span class="n">brick_start_x</span> <span class="o">+</span> <span class="n">col</span> <span class="o">*</span> <span class="n">BRICK_WIDTH</span><span class="p">,</span> <span class="n">row</span> <span class="o">*</span> <span class="n">BRICK_HEIGHT</span><span class="p">))</span>
+
+<span class="c1"># Scores and particles</span>
+<span class="n">left_score</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">right_score</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">particles</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Game loop</span>
+<span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+    <span class="c1"># Event handling</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Paddle movement</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_w</span><span class="p">]:</span>
+        <span class="n">left_paddle</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">up</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_s</span><span class="p">]:</span>
+        <span class="n">left_paddle</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">up</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_UP</span><span class="p">]:</span>
+        <span class="n">right_paddle</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">up</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_DOWN</span><span class="p">]:</span>
+        <span class="n">right_paddle</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">up</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Update ball</span>
+    <span class="n">ball</span><span class="o">.</span><span class="n">move</span><span class="p">()</span>
+
+    <span class="c1"># Ball collisions with top/bottom walls</span>
+    <span class="k">if</span> <span class="n">ball</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ball</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">SCREEN_HEIGHT</span><span class="p">:</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">vel_y</span> <span class="o">=</span> <span class="o">-</span><span class="n">ball</span><span class="o">.</span><span class="n">vel_y</span>
+
+    <span class="c1"># Ball collisions with paddles</span>
+    <span class="k">if</span> <span class="n">ball_collides_with_paddle</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">left_paddle</span><span class="p">):</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">vel_x</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">vel_x</span><span class="p">)</span>  <span class="c1"># Ensure ball moves right</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">last_hit</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
+    <span class="k">elif</span> <span class="n">ball_collides_with_paddle</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">right_paddle</span><span class="p">):</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">vel_x</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">ball</span><span class="o">.</span><span class="n">vel_x</span><span class="p">)</span>  <span class="c1"># Ensure ball moves left</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">last_hit</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
+
+    <span class="c1"># Ball collisions with bricks</span>
+    <span class="k">for</span> <span class="n">brick</span> <span class="ow">in</span> <span class="n">bricks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ball_collides_with_brick</span><span class="p">(</span><span class="n">ball</span><span class="p">,</span> <span class="n">brick</span><span class="p">):</span>
+            <span class="n">brick</span><span class="o">.</span><span class="n">intact</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">ball</span><span class="o">.</span><span class="n">vel_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">ball</span><span class="o">.</span><span class="n">vel_x</span>
+            <span class="c1"># Add particles</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+                <span class="n">particles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Particle</span><span class="p">(</span><span class="n">brick</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">brick</span><span class="o">.</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">brick</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">brick</span><span class="o">.</span><span class="n">height</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="c1"># Award points</span>
+            <span class="k">if</span> <span class="n">ball</span><span class="o">.</span><span class="n">last_hit</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+                <span class="n">left_score</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">ball</span><span class="o">.</span><span class="n">last_hit</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
+                <span class="n">right_score</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Ball off screen</span>
+    <span class="k">if</span> <span class="n">ball</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">right_score</span> <span class="o">+=</span> <span class="mi">5</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">ball</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">ball</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">SCREEN_WIDTH</span><span class="p">:</span>
+        <span class="n">left_score</span> <span class="o">+=</span> <span class="mi">5</span>
+        <span class="n">ball</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="c1"># Update particles</span>
+    <span class="k">for</span> <span class="n">particle</span> <span class="ow">in</span> <span class="n">particles</span><span class="p">[:]:</span>
+        <span class="n">particle</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">particle</span><span class="o">.</span><span class="n">life</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">particles</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">particle</span><span class="p">)</span>
+
+    <span class="c1"># Draw everything</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">brick</span> <span class="ow">in</span> <span class="n">bricks</span><span class="p">:</span>
+        <span class="n">brick</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">left_paddle</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">right_paddle</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">ball</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">particle</span> <span class="ow">in</span> <span class="n">particles</span><span class="p">:</span>
+        <span class="n">particle</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="c1"># Draw scores</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span>
+    <span class="n">left_text</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Left: </span><span class="si">{</span><span class="n">left_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>
+    <span class="n">right_text</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Right: </span><span class="si">{</span><span class="n">right_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">left_text</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">right_text</span><span class="p">,</span> <span class="p">(</span><span class="n">SCREEN_WIDTH</span> <span class="o">-</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+    <span class="c1"># Check for game over</span>
+    <span class="k">if</span> <span class="n">left_score</span> <span class="o">&gt;=</span> <span class="n">TARGET_SCORE</span> <span class="ow">or</span> <span class="n">right_score</span> <span class="o">&gt;=</span> <span class="n">TARGET_SCORE</span><span class="p">:</span>
+        <span class="n">winner</span> <span class="o">=</span> <span class="s2">&quot;Left&quot;</span> <span class="k">if</span> <span class="n">left_score</span> <span class="o">&gt;=</span> <span class="n">TARGET_SCORE</span> <span class="k">else</span> <span class="s2">&quot;Right&quot;</span>
+        <span class="n">game_over_text</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">winner</span><span class="si">}</span><span class="s2"> Wins!&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">)</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">game_over_text</span><span class="p">,</span> <span class="p">(</span><span class="n">SCREEN_WIDTH</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="n">SCREEN_HEIGHT</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Cleanup</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="n">exception</span> <span class="n">has</span> <span class="n">occurred</span><span class="p">,</span> <span class="n">use</span> <span class="o">%</span><span class="k">tb</span> to see the full traceback.
+
+<span class="ne">SystemExit</span>
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">Kernel</span> <span class="n">crashed</span> <span class="k">while</span> <span class="n">executing</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">cell</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">cell</span><span class="o">.</span> 
+
+<span class="n">Please</span> <span class="n">review</span> <span class="n">the</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">cell</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">a</span> <span class="n">possible</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">failure</span><span class="o">.</span> 
+
+<span class="n">Click</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://aka.ms/vscodeJupyterKernelCrash&#39;</span><span class="o">&gt;</span><span class="n">here</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">info</span><span class="o">.</span> 
+
+<span class="n">View</span> <span class="n">Jupyter</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;command:jupyter.viewOutput&#39;</span><span class="o">&gt;</span><span class="n">log</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">further</span> <span class="n">details</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./act2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Prometheus</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Apollo &amp; Dionysus</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-thoughts-on-the-school-of-athens">Initial Thoughts on The School of Athens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-x-for-apollo-and-athena">Checking X for Apollo and Athena</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#noise-signal-framework-structural-gods-vs-dynamic-thinkers">Noise/Signal Framework: Structural Gods vs. Dynamic Thinkers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#athenas-shield-and-w">Athena’s Shield and w</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#athenas-full-kit-spear-shield-helmet-owl">Athena’s Full Kit: Spear, Shield, Helmet, Owl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apollo-nude-vs-athena-armed">Apollo Nude vs. Athena Armed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-with-other-greek-gods">Comparing with Other Greek Gods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apollo-nude-with-lyre">Apollo: Nude with Lyre</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#athena-armed-and-armored">Athena: Armed and Armored</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zeus">Zeus</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poseidon">Poseidon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aphrodite">Aphrodite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hermes">Hermes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaway">Takeaway</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Zeus
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
