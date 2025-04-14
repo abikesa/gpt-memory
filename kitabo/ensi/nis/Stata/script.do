@@ -39,3 +39,4 @@ putexcel A1 = matrix(beta), names
 
 putexcel set vari, replace
 putexcel A1 = matrix(var), names
+# flick 20250414135802-HixY
