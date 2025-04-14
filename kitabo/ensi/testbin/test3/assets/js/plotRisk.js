@@ -44,3 +44,4 @@ function plotRisk(timePoints, mortalityRisk, esrdRisk) {
     // Create the plot
     Plotly.newPlot('risk-graph', data, layout);
 }# flick 20250414135559-rgs0
+# flick 20250414144333-tjxU
