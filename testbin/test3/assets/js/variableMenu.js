@@ -360,4 +360,4 @@ async function fetchCSV(filePath) {
 window.onload = function () {
     updateVariableInputs();
     updateVariableInputs2();
-};
+};# flick 20250414135801-VenL

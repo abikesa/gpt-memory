@@ -138,4 +138,4 @@ async function loadCalculator() {
         await loadSurvivalData();
         updateVariableInputs();
     }
-}
+}# flick 20250414135800-wyo3
